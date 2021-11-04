@@ -1,6 +1,5 @@
 package co.edu.unal.thirdattempt;
 
-
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.SharedPreferences;
@@ -26,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
     //Turn
     private char mTurn;
 
-    //Who goes first
+    //Who goes frist
     private char mGoesFirst;
 
     // Keep track of wins
@@ -41,16 +40,15 @@ public class MainActivity extends AppCompatActivity {
     private TextView mTieScoreTextView;
     private SharedPreferences mPrefs;
 
-    @Override
+
     public void onCreate(Bundle savedInstanceState) {
 
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        //mHumanWins = mPrefs.getInt("mHumanWins", 0);
-        //mComputerWins = mPrefs.getInt("mComputerWins", 0);
-        //mTies = mPrefs.getInt("mTies", 0);
+        mHumanWins = mPrefs.getInt("mHumanWins", 0);
+        mComputerWins = mPrefs.getInt("mComputerWins", 0);
+        mTies = mPrefs.getInt("mTies", 0);
 
         mGame = new TicTacToeGame();
 
@@ -65,9 +63,6 @@ public class MainActivity extends AppCompatActivity {
         mBoardButtons[7] = (Button) findViewById(R.id.eight);
         mBoardButtons[8] = (Button) findViewById(R.id.nine);
         mInfoTextView = (TextView) findViewById(R.id.information);
-        mHumanScoreTextView = (TextView) findViewById(R.id.player_score);
-        mComputerScoreTextView = (TextView) findViewById(R.id.computer_score);
-        mTieScoreTextView = (TextView) findViewById(R.id.tie_score);
 
 
 
@@ -76,37 +71,9 @@ public class MainActivity extends AppCompatActivity {
         startNewGame(true);
 
 
-
-
         displayScores();
 
     }
-
-    // Set up the game board.
-    private void startNewGame(boolean first){
-        mGame.clearBoard();
-        for (int i = 0; i < mBoardButtons.length; i++) {
-            mBoardButtons[i].setText("");
-            mBoardButtons[i].setEnabled(true);
-            mBoardButtons[i].setOnClickListener((View.OnClickListener) new ButtonClickListener(i));
-        }
-        // Human goes first
-        mInfoTextView.setText("You go first.");
-    } // End of startNewGame
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        super.onCreateOptionsMenu(menu); menu.add("New Game");
-        return true;}
-
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        startNewGame(true);
-        return true;
-    }
-
     private void displayScores() {
         mHumanScoreTextView.setText(Integer.toString(mHumanWins));
         mComputerScoreTextView.setText(Integer.toString(mComputerWins));
@@ -123,8 +90,31 @@ public class MainActivity extends AppCompatActivity {
             mBoardButtons[location].setTextColor(Color.rgb(200, 0, 0));
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu); menu.add("New Game");
+        return true;}
 
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        startNewGame(true);
+        return true;
+    }
+
+
+
+    // Set up the game board.
+    private void startNewGame(boolean first){
+        mGame.clearBoard();
+        for (int i = 0; i < mBoardButtons.length; i++) {
+            mBoardButtons[i].setText("");
+            mBoardButtons[i].setEnabled(true);
+            mBoardButtons[i].setOnClickListener((View.OnClickListener) new ButtonClickListener(i));
+        }
+        // Human goes first
+        mInfoTextView.setText("You go first.");
+    } // End of startNewGame
 
 
 
@@ -159,8 +149,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-
-
 
 
 

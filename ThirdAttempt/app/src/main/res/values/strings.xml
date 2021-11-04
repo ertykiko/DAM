@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">ThirdAttempt</string>
+    <string name="score_label_human">score_label_human</string>
+    <string name="info">info</string>
+    <string name="zero">zero</string>
+    <string name="score_label_tie">score_label_tie</string>
+    <string name="score_label_computer">score_label_computer</string>
 </resources>
