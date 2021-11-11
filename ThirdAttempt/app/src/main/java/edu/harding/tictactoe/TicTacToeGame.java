@@ -19,6 +19,11 @@ import co.edu.unal.thirdattempt.MainActivity;
 
 public class TicTacToeGame {
 
+    // The computer's difficulty levels
+    public enum DifficultyLevel {Easy, Harder, Expert};
+    // Current difficulty level
+    private DifficultyLevel mDifficultyLevel = DifficultyLevel.Expert;
+
     public static final int BOARD_SIZE = 9;
     private char mBoard[];
 
@@ -56,6 +61,38 @@ public class TicTacToeGame {
         mBoard = currentGame;
     }
 
+    /** Set the given player at the given location on the game board.
+     *  The location must be available, or the board will not be changed.
+     *
+     * @param player - The HUMAN_PLAYER or COMPUTER_PLAYER
+     * @param location - The location (0-8) to place the move
+     */
+    public boolean setMove(char player, int location) {
+        if(location < 0 || location >= BOARD_SIZE)
+            throw new IllegalArgumentException("location must be between 0 and 8 inclusive: " + location);
+        if(!(player == HUMAN_PLAYER || player == COMPUTER_PLAYER))
+            throw new IllegalArgumentException("player must be "  + HUMAN_PLAYER + " or "
+                    + COMPUTER_PLAYER + ". " + player);
+
+        if(mBoard[location] == OPEN_SPOT) {
+            mBoard[location] = player;
+            // Log.d(TAG, "location: " + location + " player: " + player + " board " + Arrays.toString(mBoard));
+            return true;
+        }
+        return false;
+    }
+
+    public DifficultyLevel getDifficultyLevel() {
+        return mDifficultyLevel;
+    }
+
+    public void setDifficultyLevel(DifficultyLevel difficultyLevel) {
+        mDifficultyLevel = difficultyLevel;
+    }
+
+    public int getBoardOccupant(int cellNum) {
+        return mBoard[cellNum];
+    }
 
 
 
@@ -106,58 +143,31 @@ public class TicTacToeGame {
         return 1;
     }
 
-
-    /**
-     * @param args
-     */
-    public static void main(String[] args) {
-
-        new TicTacToeGame();
-
-    }
-
-
-
-
-
-    /** Set the given player at the given location on the game board.
-     *  The location must be available, or the board will not be changed.
-     *
-     * @param player - The HUMAN_PLAYER or COMPUTER_PLAYER
-     * @param location - The location (0-8) to place the move
-     */
-    public boolean setMove(char player, int location) {
-        if(location < 0 || location >= BOARD_SIZE)
-            throw new IllegalArgumentException("location must be between 0 and 8 inclusive: " + location);
-        if(!(player == HUMAN_PLAYER || player == COMPUTER_PLAYER))
-            throw new IllegalArgumentException("player must be "  + HUMAN_PLAYER + " or "
-                    + COMPUTER_PLAYER + ". " + player);
-
-        if(mBoard[location] == OPEN_SPOT) {
-            mBoard[location] = player;
-            // Log.d(TAG, "location: " + location + " player: " + player + " board " + Arrays.toString(mBoard));
-            return true;
-        }
-        return false;
-    }
-
-
-
     /**
      * Return the best move for the computer to make. You must call setMove() * to actually make the computer move to that location.
      *
      * @return The best move for the computer to make (0-8).
      */
     public int getComputerMove() {
-        int move = -1 ;
 
-        // First see if there's a move O can make to win
+        int move = -1;
 
-        move = getWinningMove();
-
-        if(move == -1)
+        if (mDifficultyLevel == DifficultyLevel.Easy)
             move = getRandomMove();
-
+        else if (mDifficultyLevel == DifficultyLevel.Harder) {
+            move = getWinningMove();
+            if (move == -1)
+                move = getRandomMove();
+        }
+        else if (mDifficultyLevel == DifficultyLevel.Expert) {
+            // Try to win, but if that's not possible, block.
+            // If that's not possible, move anywhere.
+            move = getWinningMove();
+            if (move == -1)
+                move = getBlockingMove();
+            if (move == -1)
+                move = getRandomMove();
+        }
 
         return move;
     }
@@ -168,18 +178,15 @@ public class TicTacToeGame {
                 mBoard[i] = HUMAN_PLAYER;
                 if (checkForWinner() == 2) {
                     mBoard[i] = OPEN_SPOT; // restore
-                    // Log.d(TAG, "Computer moving to " + i + " to block win.");
                     return i;
                 }
                 else
                     mBoard[i] = OPEN_SPOT;
             }
         }
-        // Log.d(TAG, "computer could not find a blocking  move");
+
         return -1; // never found a blocking move
     }
-
-
 
     // find a winning move if it exits.
     // if not return -1
@@ -205,11 +212,12 @@ public class TicTacToeGame {
             move = mRand.nextInt(BOARD_SIZE);
         } while (mBoard[move] != OPEN_SPOT);
 
-        // Log.d(TAG, "in getRandomMove(), Computer moving to " + move + " as a random move.");
+
 
         return move;
 
     }
+
 }
 
 

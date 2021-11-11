@@ -1,8 +1,25 @@
 <resources>
-    <string name="app_name">ThirdAttempt</string>
-    <string name="score_label_human">score_label_human</string>
+    <string name="app_name">TicTacToe</string>
+
     <string name="info">info</string>
     <string name="zero">zero</string>
-    <string name="score_label_tie">score_label_tie</string>
-    <string name="score_label_computer">score_label_computer</string>
+    <string name="score_label_human">Human</string>
+    <string name="score_label_tie">Tie</string>
+    <string name="score_label_computer">Computer</string>
+    <string name="difficulty_choose">Choose a difficulty level:</string>
+    <string name="difficulty_easy">Easy</string>
+    <string name="difficulty_expert">Expert (Ha -Ha)</string>
+    <string name="difficulty_harder">Harder</string>
+    <string name="difficulty_menu">Difficulty</string>
+    <string name="quit_menu">Quit</string>
+    <string name="quit_question">Are you sure you want to quit?</string>
+    <string name="yes">Yes</string>
+    <string name="reset_scores">Reset Scores</string>
+    <string name="no">No</string>
+    <string name="result_computer_wins">Android won!</string>
+    <string name="result_human_wins">You won!</string>
+    <string name="result_tie">It\'s a tie.</string>
+    <string name="new_game">New Game</string>
+    <string name="difficulty">Difficulty</string>
+    <string name="quit">Quit</string>
 </resources>
