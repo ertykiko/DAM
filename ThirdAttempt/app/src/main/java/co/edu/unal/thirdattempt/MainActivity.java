@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
 
     // Buttons making up the board
     private Button[] mBoardButtons;
-
+    public boolean freeze;
     //If game is over
     private boolean mGameOver;
 
@@ -120,6 +120,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         mGameOver = false ;
+        freeze = false;
 
     } // End of startNewGame
 
@@ -253,15 +254,15 @@ public class MainActivity extends AppCompatActivity {
                     winner = mGame.checkForWinner();
                 }
                 if (winner == 0) mInfoTextView.setText("It's your turn.");
-                else if (winner == 1) {
+                else if (winner == 1 && !freeze) {
                     mInfoTextView.setText("It's a tie!");
                     endGame(winner);
                 }
-                else if (winner == 2) {
+                else if (winner == 2 && !freeze) {
                     mInfoTextView.setText("You won!");
                     endGame(winner);
                 }
-                else if(winner == 3) {
+                else if(winner == 3 && !freeze) {
                     mInfoTextView.setText("Android won!");
                     endGame(winner);
                 }
@@ -277,16 +278,19 @@ public class MainActivity extends AppCompatActivity {
             mTies++;
             mTieScoreTextView.setText(Integer.toString(mTies));
             mInfoTextView.setText(R.string.result_tie);
+            freeze = true;
         }
         else if (winner == 2) {
             mHumanWins++;
             mHumanScoreTextView.setText(Integer.toString(mHumanWins));
             mInfoTextView.setText(R.string.result_human_wins);
+            freeze = true;
         }
         else {
             mComputerWins++;
             mComputerScoreTextView.setText(Integer.toString(mComputerWins));
             mInfoTextView.setText(R.string.result_computer_wins);
+            freeze = true;
         }
         mGameOver = true;
 
