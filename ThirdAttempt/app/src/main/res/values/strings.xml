@@ -22,4 +22,6 @@
     <string name="new_game">New Game</string>
     <string name="difficulty">Difficulty</string>
     <string name="quit">Quit</string>
+    <string name="first_computer">Android Goes First</string>
+    <string name="first_human">You go first.</string>
 </resources>

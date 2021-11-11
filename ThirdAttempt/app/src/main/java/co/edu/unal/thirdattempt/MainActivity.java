@@ -22,14 +22,13 @@ import edu.harding.tictactoe.TicTacToeGame;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String TAG = "AndroidTicTacToe";
+    private static final String TAG = "TicTacToe";
 
     // for preferences
     static final int DIALOG_DIFFICULTY_ID = 0;
     static final int DIALOG_QUIT_ID = 1;
     static final int DIALOG_ABOUT_ID = 2;
     static final int DIALOG_RESET_ID = 3;
-    private SharedPreferences mPrefs;
     private int mDiffLev;
 
     //Turn
@@ -66,9 +65,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //mHumanWins = mPrefs.getInt("mHumanWins", 0);
-        //mComputerWins = mPrefs.getInt("mComputerWins", 0);
-        //mTies = mPrefs.getInt("mTies", 0);
+
 
         mGame = new TicTacToeGame();
 
@@ -83,9 +80,9 @@ public class MainActivity extends AppCompatActivity {
         mBoardButtons[7] = (Button) findViewById(R.id.eight);
         mBoardButtons[8] = (Button) findViewById(R.id.nine);
         mInfoTextView = (TextView) findViewById(R.id.information);
-        //mHumanScoreTextView = (TextView) findViewById(R.id.player_score);
-        //mComputerScoreTextView = (TextView) findViewById(R.id.computer_score);
-        //mTieScoreTextView = (TextView) findViewById(R.id.tie_score);
+        mHumanScoreTextView = (TextView) findViewById(R.id.player_score);
+        mComputerScoreTextView = (TextView) findViewById(R.id.computer_score);
+        mTieScoreTextView = (TextView) findViewById(R.id.tie_score);
 
 
 
@@ -96,20 +93,34 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        //displayScores();
+        displayScores();
 
     }
 
     // Set up the game board.
     private void startNewGame(boolean first){
         mGame.clearBoard();
+
+
+
+        // Who starts?
+        if (mTurn == TicTacToeGame.COMPUTER_PLAYER) {
+            mInfoTextView.setText(R.string.first_computer);
+            int move = mGame.getComputerMove();
+            setMove(TicTacToeGame.COMPUTER_PLAYER, move);
+        }
+        else {
+            mInfoTextView.setText(R.string.first_human);
+        }
+
         for (int i = 0; i < mBoardButtons.length; i++) {
             mBoardButtons[i].setText("");
             mBoardButtons[i].setEnabled(true);
             mBoardButtons[i].setOnClickListener((View.OnClickListener) new ButtonClickListener(i));
         }
-        // Human goes first
-        mInfoTextView.setText("You go first.");
+
+        mGameOver = false ;
+
     } // End of startNewGame
 
 
@@ -190,6 +201,14 @@ public class MainActivity extends AppCompatActivity {
         mTieScoreTextView.setText(Integer.toString(mTies));
     }
 
+    private void startComputerDelay() {
+        // If it's the computer's turn, the previous turn was not completed, so go again
+        if (!mGameOver && mTurn == TicTacToeGame.COMPUTER_PLAYER) {
+            int move = mGame.getComputerMove();
+            setMove(TicTacToeGame.COMPUTER_PLAYER, move);
+        }
+    }
+
     private void setMove(char player, int location) {
         mGame.setMove(player, location);
         mBoardButtons[location].setEnabled(false);
@@ -216,12 +235,17 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             if (mBoardButtons[location].isEnabled()) {
-                setMove(edu.harding.tictactoe.TicTacToeGame.HUMAN_PLAYER, location);
+                if(!mGameOver){
+                setMove(edu.harding.tictactoe.TicTacToeGame.HUMAN_PLAYER, location);}
                 // If no winner yet, let the computer make a move
                 int winner = mGame.checkForWinner();
-                if(mGameOver == true){
-                    endGame(winner);
-                }
+
+
+
+
+
+
+
                 if (!mGameOver && winner == 0) {
                     mInfoTextView.setText("It's Android's turn.");
                     int move = mGame.getComputerMove();
@@ -229,10 +253,18 @@ public class MainActivity extends AppCompatActivity {
                     winner = mGame.checkForWinner();
                 }
                 if (winner == 0) mInfoTextView.setText("It's your turn.");
-                else if (winner == 1) mInfoTextView.setText("It's a tie!");
-                else if (winner == 2) mInfoTextView.setText("You won!");
-                else
+                else if (winner == 1) {
+                    mInfoTextView.setText("It's a tie!");
+                    endGame(winner);
+                }
+                else if (winner == 2) {
+                    mInfoTextView.setText("You won!");
+                    endGame(winner);
+                }
+                else if(winner == 3) {
                     mInfoTextView.setText("Android won!");
+                    endGame(winner);
+                }
             }
 
         }
@@ -257,6 +289,7 @@ public class MainActivity extends AppCompatActivity {
             mInfoTextView.setText(R.string.result_computer_wins);
         }
         mGameOver = true;
+
     }
 
 
