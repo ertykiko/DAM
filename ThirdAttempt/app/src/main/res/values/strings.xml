@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">TicTacToe</string>
-
+    <string name="turn_human">Your turn.</string>
+    <string name="turn_computer">Android\'s turn.</string>
     <string name="info">info</string>
     <string name="zero">zero</string>
     <string name="score_label_human">Human</string>
