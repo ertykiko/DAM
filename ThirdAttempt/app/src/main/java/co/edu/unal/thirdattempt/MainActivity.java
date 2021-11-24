@@ -7,6 +7,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -56,6 +57,9 @@ public class MainActivity extends AppCompatActivity {
     //Game logic
     private TicTacToeGame mGame;
 
+    //make the game scores persist betwee application restarts:
+    private SharedPreferences mPrefs;
+
     // Buttons making up the board
     private Button[] mBoardButtons;
     public boolean freeze;
@@ -87,6 +91,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        mPrefs = getSharedPreferences("ttt_prefs", MODE_PRIVATE);
+        // Restore the scores
+        mHumanWins = mPrefs.getInt("mHumanWins", 0);
+        mComputerWins = mPrefs.getInt("mComputerWins", 0);
+        mTies = mPrefs.getInt("mTies", 0);
 
         mGame = new TicTacToeGame();
 
@@ -107,8 +116,22 @@ public class MainActivity extends AppCompatActivity {
         mGoesFirst = TicTacToeGame.COMPUTER_PLAYER;
         mPauseHandler = new Handler();
 
-        startNewGame(true);
 
+        if (savedInstanceState == null) {
+            startNewGame(true);
+        }
+        else { // Restore the game's state
+            mGame.setBoardState(savedInstanceState.getCharArray("board"));
+            mGameOver = savedInstanceState.getBoolean("mGameOver");
+            mTurn = savedInstanceState.getChar("mTurn");
+            mGoesFirst = savedInstanceState.getChar("mGoFirst");
+            mInfoTextView.setText(savedInstanceState.getCharSequence("info"));
+
+            //mHumanWins = savedInstanceState.getInt("mHumanWins");
+            //mComputerWins = savedInstanceState.getInt("mComputerWins");
+            //mTies = savedInstanceState.getInt("mTies");
+
+        }
 
         displayScores();
 
@@ -164,8 +187,8 @@ public class MainActivity extends AppCompatActivity {
             case R.id.ai_difficulty:
                 showDialog(DIALOG_DIFFICULTY_ID);
                 return true;
-            case R.id.quit:
-                showDialog(DIALOG_QUIT_ID);
+            case R.id.reset_scores:
+                showDialog(DIALOG_RESET_ID);
                 return true;
         }
         return false;
@@ -212,6 +235,12 @@ public class MainActivity extends AppCompatActivity {
                         })
                         .setNegativeButton(R.string.no, null);
                 dialog = builder.create();
+                break;
+            case DIALOG_RESET_ID:
+                mHumanWins = 0;
+                mComputerWins = 0;
+                mTies = 0;
+                displayScores();
                 break;
         }
         return dialog;
@@ -288,6 +317,17 @@ public class MainActivity extends AppCompatActivity {
             mSounds = null;
         }
     }
+    @Override
+    protected void onStop() {
+        super.onStop();
+        // Save the current scores
+        SharedPreferences.Editor ed = mPrefs.edit();
+        ed.putInt("mHumanWins", mHumanWins);
+        ed.putInt("mComputerWins", mComputerWins);
+        ed.putInt("mTies", mTies);
+        ed.commit();
+    }
+
     private void createSoundPool() {
         int[] soundIds = {R.raw.human_move, R.raw.computer_move, R.raw.human_win,
                 R.raw.computer_win, R.raw.tie_game};
@@ -296,6 +336,19 @@ public class MainActivity extends AppCompatActivity {
         for(int id : soundIds)
             mSoundIDMap.put(id, mSounds.load(this, id, 1));
     }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putCharArray("board", mGame.getBoardState());
+        outState.putBoolean("mGameOver", mGameOver);
+        outState.putInt("mHumanWins", Integer.valueOf(mHumanWins));
+        outState.putInt("mComputerWins", Integer.valueOf(mComputerWins));
+        outState.putInt("mTies", Integer.valueOf(mTies));
+        outState.putCharSequence("info", mInfoTextView.getText());
+        outState.putChar("mGoesFirst", mGoesFirst);
+    }
+
 
 
 
