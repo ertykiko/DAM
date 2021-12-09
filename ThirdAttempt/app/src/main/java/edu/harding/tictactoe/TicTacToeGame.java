@@ -31,6 +31,10 @@ public class TicTacToeGame {
     public static final char COMPUTER_PLAYER = 'O';
     public static final char OPEN_SPOT = ' ';
 
+    public static final char PLAYER1 = 'X';
+    public static final char PLAYER2 = 'O';
+
+
     private Random mRand;
 
     public TicTacToeGame() {
