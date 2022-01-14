@@ -1,4 +1,5 @@
 package co.unal.co.reto8;
+
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -7,7 +8,9 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,7 +25,7 @@ public class DisplayContact extends AppCompatActivity {
     TextView email;
     TextView products;
     TextView url;
-    String get
+    Spinner type;
 
     int id_To_Update = 0;
 
@@ -35,7 +38,13 @@ public class DisplayContact extends AppCompatActivity {
         products = (TextView) findViewById(R.id.editTextProducts);
         email = (TextView) findViewById(R.id.editTextEmail);
         url = (TextView) findViewById(R.id.editTextWeb);
-        type = findViewById(R.id.editTextType);
+        type = findViewById(R.id.spinner_type);
+
+        ArrayAdapter<CharSequence>adapter= ArrayAdapter.createFromResource(this, R.array.type_option, android.R.layout.simple_spinner_item);
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+
+        type.setAdapter(adapter);
 
 
         mydb = new DBHelper(this);
@@ -57,6 +66,8 @@ public class DisplayContact extends AppCompatActivity {
                 String prod = rs.getString(rs.getColumnIndexOrThrow(DBHelper.CONTACTS_COLUMN_PRODUCTS));
                 String typ = rs.getString(rs.getColumnIndexOrThrow(DBHelper.CONTACTS_COLUMN_TYPE));
                 String web = rs.getString(rs.getColumnIndexOrThrow(DBHelper.CONTACTS_COLUMN_URL));
+
+
 
 
                 if (!rs.isClosed())  {
@@ -81,7 +92,6 @@ public class DisplayContact extends AppCompatActivity {
                 products.setFocusable(false);
                 products.setClickable(false);
 
-                type.setText((CharSequence)typ);
                 type.setFocusable(false);
                 type.setClickable(false);
 
