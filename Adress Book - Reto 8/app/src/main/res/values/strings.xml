@@ -24,4 +24,18 @@
         <item>Customised development</item>
         <item>Software development</item>
     </string-array>
+    <string name="consultancy">Consultancy</string>
+    <string name="development">Customised development</string>
+    <string name="softdev">Software development</string>
+    <string name="company_list">Company List</string>
+    <string name="check">Are you sure ?</string>
+
+    <!--Actions-->
+    <string name="created_success">Contacted created successfully</string>
+    <string name="created_failure">Failed to create contact</string>
+    <string name="updated_success">Changes have been made successfully</string>
+    <string name="updated_failure">Changes have failed</string>
+    <string name="deleted_success">Deleted successfully</string>
+    <string name="deleted_failure">Unable to delete contact</string>
+
 </resources>
