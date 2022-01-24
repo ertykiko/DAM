@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <string name="app_name">GPS interest points</string>
+    <string name="lat">Latitude</string>
+    <string name="longi">Longitude</string>
+    <string name="rad">Radius</string>
+    <string name="button">Go</string>
+    <string name="type">Type of POI</string>
+    <string-array name="poi_array">
+        <item>Bank</item>
+        <item>Cinema</item>
+        <item>ATM</item>
+        <item>Hospital</item>
+        <item>Gas Station</item>
+    </string-array>
+    <string name="search">Search</string>
+
+</resources>

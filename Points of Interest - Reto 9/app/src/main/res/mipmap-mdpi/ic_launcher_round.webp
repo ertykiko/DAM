@@ -1,0 +1,44 @@
+package co.edu.unal.reto8;
+
+import android.annotation.SuppressLint;
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.DatabaseUtils;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Pair;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+
+public class DBHelper extends SQLiteOpenHelper {
+
+    public static final String DATABASE_NAME = "Contact.db";
+    public static final String CONTACTS_TABLE_NAME = "contacts";
+    public static final String CONTACTS_COLUMN_ID = "id";
+    public static final String CONTACTS_COLUMN_NAME = "name";
+    public static final String CONTACTS_COLUMN_EMAIL = "email";
+    public static final String CONTACTS_COLUMN_PRODUCTS = "products";
+    public static final String CONTACTS_COLUMN_URL = "url";
+    public static final String CONTACTS_COLUMN_PHONE = "phone";
+    public static final String CONTACTS_COLUMN_TYPE = "type";
+    public static final String TAG = "TABLE :";
+    public static final String CONTACTS_COLUMN_ISCONSULTANCY = "isconsultancy";
+    public static final String CONTACTS_COLUMN_ISDEVELOPMENT = "isdevelopment";
+    public static final String CONTACTS_COLUMN_ISFABRIC = "isfabric";
+    private HashMap hp;
+
+    //SQLiteDatabase mydatabase = SQLiteDatabase.openOrCreateDatabase("contacts",MODE_PRIVATE,null);
+    
+
+    public DBHelper(Context context) {
+        super(context, DATABASE_NAME , null, 1);
+    }
+
+    @Override
+    public void onCreate(SQLiteDatabase db) {
+        // TODO Auto-generated method stub
+        db.execSQL(
+                "create table contacts " +
+                        "(id integer primary key, name text, url text, phone text,email text, prod

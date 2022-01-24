@@ -1,0 +1,96 @@
+package co.edu.unal.reto8;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.annotation.SuppressLint;
+import android.os.Bundle;
+import android.app.Activity;
+import android.app.AlertDialog;
+
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.database.Cursor;
+
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import co.unal.co.reto8.R;
+
+public class DisplayContact extends AppCompatActivity {
+    int from_Where_I_Am_Coming = 0;
+    private DBHelper mydb ;
+
+    TextView name ;
+    TextView url;
+    TextView phone;
+    TextView email;
+    TextView products;
+    CheckBox consultancy;
+    CheckBox development;
+    CheckBox fabric;
+    int id_To_Update = 0;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_display_contact);
+        name = (TextView) findViewById(R.id.editTextName);
+        url = (TextView) findViewById(R.id.editTextURL);
+        phone = (TextView) findViewById(R.id.editTextPhone);
+        email = (TextView) findViewById(R.id.editTextEmail);
+        products = (TextView) findViewById(R.id.editTextProducts);
+        //Checkboxes
+        consultancy = findViewById(R.id.cbConsultancy);
+        consultancy.setOnClickListener(CheckBoxListener());
+        development = findViewById(R.id.cbDevelopment);
+        development.setOnClickListener(CheckBoxListener());
+        fabric = findViewById(R.id.cbFabric);
+        fabric.setOnClickListener(CheckBoxListener());
+
+        mydb = new DBHelper(this);
+
+        Bundle extras = getIntent().getExtras();
+        if(extras !=null) {
+            int Value = extras.getInt("id");
+            System.out.println("value: "+Value);
+            if(Value>0){
+                //means this is the view part not the add contact part.
+                Cursor rs = mydb.getData(Value);
+                id_To_Update = Value;
+                rs.moveToFirst();
+
+                @SuppressLint("Range") String tName = rs.getString(rs.getColumnIndex(DBHelper.CONTACTS_COLUMN_NAME));
+                @SuppressLint("Range") String tUrl = rs.getString(rs.getColumnIndex(DBHelper.CONTACTS_COLUMN_URL));
+                @SuppressLint("Range") String tPhone = rs.getString(rs.getColumnIndex(DBHelper.CONTACTS_COLUMN_PHONE));
+                @SuppressLint("Range") String tEmail = rs.getString(rs.getColumnIndex(DBHelper.CONTACTS_COLUMN_EMAIL));
+                @SuppressLint("Range") String tProducts = rs.getString(rs.getColumnIndex(DBHelper.CONTACTS_COLUMN_PRODUCTS));
+                @SuppressLint("Range") int tConsultancy = rs.getInt(rs.getColumnIndex(DBHelper.CONTACTS_COLUMN_ISCONSULTANCY));
+                @SuppressLint("Range") int tDevelopment = rs.getInt(rs.getColumnIndex(DBHelper.CONTACTS_COLUMN_ISDEVELOPMENT));
+                @SuppressLint("Range") int tFabric = rs.getInt(rs.getColumnIndex(DBHelper.CONTACTS_COLUMN_ISFABRIC));
+
+                //System.out.println("tC: "+ tConsultancy+", tD: "+ tDevelopment+", tF: "+tFabric);
+
+                if (!rs.isClosed())  {
+                    rs.close();
+                }
+                Button b = (Button)findViewById(R.id.button1);
+                b.setVisibility(View.INVISIBLE);
+
+                name.setText((CharSequence)tName);
+                name.setFocusable(false);
+                name.setClickable(false);
+
+                setTitle(getResources().getString(R.string.company) +": " + tName);
+
+                url.setText((CharSequence)tUrl);
+                url.setFocusable(false);
+                url.setClickable(false);
+
+                phone.setText((CharSequence)tPhone);
+            

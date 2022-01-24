@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:orientation="vertical"
+android:layout_width="match_parent"
+android:layout_height="match_parent">
+<!--Latitude-->
+    <TextView
+        android:id="@+id/tv_Lat"
+        android:layout_width="@dimen/box_w"
+        android:layout_height="@dimen/box_h"
+        android:layout_marginTop="70dp"
+        android:layout_marginLeft="70dp"
+        android:paddingTop="10dp"
+        android:text="@string/lat"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/et_lat"
+        android:layout_width="@dimen/box_w"
+        android:layout_marginTop="70dp"
+        android:layout_marginLeft="20dp"
+        android:layout_height="@dimen/box_h"
+        android:inputType="numberSigned|numberDecimal"
+        android:layout_toRightOf="@id/tv_Lat" />
+
+    <!--Longitude-->
+    <TextView
+        android:id="@+id/tv_Longi"
+        android:layout_marginLeft="70dp"
+        android:layout_width="@dimen/box_w"
+        android:layout_height="@dimen/box_h"
+        android:layout_below="@+id/tv_Lat"
+        android:paddingTop="10dp"
+        android:text="@string/longi"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/et_longi"
+        android:layout_width="@dimen/box_w"
+        android:layout_height="@dimen/box_h"
+        android:layout_below="@+id/tv_Lat"
+        android:layout_toRightOf="@id/tv_Lat"
+        android:layout_marginLeft="20dp"
+        android:inputType="numberSigned|numberDecimal" />
+
+    <!--Radius-->
+    <TextView
+        android:id="@+id/Radius"
+        android:layout_marginLeft="70dp"
+        android:layout_width="@dimen/box_w"
+        android:layout_height="@dimen/box_h"
+        android:layout_below="@+id/tv_Longi"
+        android:paddingTop="10dp"
+        android:text="@string/rad"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/et_radius"
+        android:layout_width="@dimen/box_w"
+        android:layout_height="@dimen/box_h"
+        android:layout_below="@+id/tv_Longi"
+        android:layout_toRightOf="@id/tv_Lat"
+        android:layout_marginLeft="20dp"
+        android:inputType="numberDecimal" />
+
+    <!--Type of POI-->
+    <TextView
+        android:id="@+id/tv_type"
+        android:layout_marginLeft="70dp"
+        android:layout_width="@dimen/box_w"
+        android:layout_height="@dimen/sp_h"
+        android:layout_below="@id/et_radius"
+        android:text="@string/type"
+        android:textSize="20sp" />
+
+    <Spinner
+        android:id="@+id/poi_spinner"
+        android:layout_width="120dp"
+        android:layout_height="@dimen/sp_h"
+        android:layout_toRightOf="@id/tv_type"
+        android:layout_marginLeft="20dp"
+        android:layout_below="@id/et_radius"/>
+
+    <!--Button-->
+
+    <Button
+        android:id="@+id/sbutton"
+        android:layout_width="@dimen/box_w"
+        android:layout_height="@dimen/box_h"
+        android:layout_below="@id/tv_type"
+        android:layout_marginLeft="130dp"
+
+        android:layout_marginTop="70dp"
+        android:text="@string/button" />
+
+
+</RelativeLayout>
