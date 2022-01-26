@@ -345,7 +345,7 @@ public class Multiplayer extends AppCompatActivity {
                 }).setIcon(android.R.drawable.ic_dialog_info)
                 .show();
     }
-    
+
 
 
 

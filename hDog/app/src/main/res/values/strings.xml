@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">hDog</string>
+    <string name="dogNeeds_text">Que necessita tu perro hoy</string>
+    <string name="dogPlan_text">Planea la vida de tu perro !</string>
+    <string name="clientArea_text">Tu área de cliente</string>
+    <string name="about_text">O que és hDog ?</string>
+
+</resources>

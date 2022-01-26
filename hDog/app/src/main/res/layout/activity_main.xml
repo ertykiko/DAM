@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:layout_marginTop="10dp" >
+
+
+    <Button
+        android:layout_marginTop="200dp"
+        android:id="@+id/dogNeeds_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/dogNeeds_text"
+        android:textAllCaps="false"
+        />
+
+    <Button
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/dogNeeds_button"
+        android:id="@+id/dogPlan_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/dogPlan_text"
+        android:textAllCaps="false"
+        />
+    <Button
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/dogPlan_button"
+        android:id="@+id/clientArea_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/clientArea_text"
+        android:textAllCaps="false"
+        />
+    <Button
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/clientArea_button"
+        android:id="@+id/about_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/about_text"
+        android:textAllCaps="false"
+        />
+
+
+</RelativeLayout>
