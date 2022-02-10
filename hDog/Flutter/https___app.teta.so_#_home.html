@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<!-- saved from url=(0022)https://app.teta.so/#/ -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <title></title>
+  <meta name="description" content="Build apps in a weekend. With your whole team.">
+
+  <!-- iOS meta tags & icons -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="Teta">
+  <link rel="apple-touch-icon" href="https://app.teta.so/icons/Icon-192.png">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" type="image/png" href="https://app.teta.so/favicon.png">
+
+  <title>Teta</title>
+  <script src="./https___app.teta.so_#_home_files/saved_resource"></script>
+  <link rel="manifest" href="https://app.teta.so/manifest.json">
+  <!--<base href="/">--><base href=".">
+  <script src="./https___app.teta.so_#_home_files/platform.js.transferir"></script>
+  <script>
+    if (platform.name.toLowerCase() == "safari" && parseInt(platform.version.split(".")[0]) >= 15) {
+      window.flutterWebRenderer = "html";
+    } else {
+      // Optional, default is `auto`
+      window.flutterWebRenderer = "canvaskit";
+    }
+  </script>
+<link rel="stylesheet" href="./https___app.teta.so_#_home_files/toastify.css"><script async="" src="./https___app.teta.so_#_home_files/toastify.js.transferir"></script><style></style><meta flt-viewport="" name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><script src="./https___app.teta.so_#_home_files/canvaskit.js.transferir"></script><script src="./https___app.teta.so_#_home_files/js" async=""></script><meta id="flutterweb-theme" name="theme-color" content="#2196f3"></head>
+
+<body oncontextmenu="return false;" flt-renderer="canvaskit (requested explicitly)" flt-build-mode="release" spellcheck="false" style="position: fixed; inset: 0px; overflow: hidden; padding: 0px; margin: 0px; user-select: none; touch-action: none; font: 14px sans-serif; color: red;">
+  <script src="./https___app.teta.so_#_home_files/firebase-app.js.transferir"></script>
+
+  <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+  <script src="./https___app.teta.so_#_home_files/firebase-analytics.js.transferir"></script>
+  <script src="./https___app.teta.so_#_home_files/firebase-firestore.js.transferir"></script>
+  <script src="./https___app.teta.so_#_home_files/firebase-database.js.transferir"></script>
+  <script src="./https___app.teta.so_#_home_files/firebase-auth.js.transferir"></script>
+  <script src="./https___app.teta.so_#_home_files/firebase-functions.js.transferir"></script>
+  <script src="./https___app.teta.so_#_home_files/firebase-storage.js.transferir"></script>
+
+  <script src="./https___app.teta.so_#_home_files/FileSaver.min.js.transferir"></script>
+
+  <script>
+    function webSaveAs(blob, name) {
+      saveAs(blob, name);
+    }
+  </script>
+
+
+  <script type="application/javascript">
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    var firebaseConfig = {
+      apiKey: "AIzaSyDJLrpCf5718SL-KHh4pq2YlXN3dAYVzsI",
+      authDomain: "flutter-editor.firebaseapp.com",
+      databaseURL: "https://flutter-editor.firebaseio.com",
+      projectId: "flutter-editor",
+      storageBucket: "flutter-editor.appspot.com",
+      messagingSenderId: "492292088461",
+      appId: "1:492292088461:web:d7d04649e27fc59c83f8c4",
+      measurementId: "G-8LGMGZKG36"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+  </script>
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function () {
+        navigator.serviceWorker.register('flutter_service_worker.js?v=3321215639');
+      });
+    }
+  </script>
+
+  <script>
+    // Live users tracking service
+    try {
+      const _live_count_ws = new WebSocket('wss://backend.teta.so:8977');
+      function _sendCurrentPage() {
+        const currentPage = window.location.href;
+        _live_count_ws.send(JSON.stringify({
+          cmd: 'set',
+          value: { currentPage }
+        }));
+      }
+      _live_count_ws.onopen = function () {
+        _sendCurrentPage();
+        setInterval(() => {
+          if (_live_count_ws.readyState == _live_count_ws.OPEN) {
+            _sendCurrentPage();
+          }
+        }, 10000);
+      }
+    } catch (ex) {
+      console.log('LiveUsersServiceError', ex);
+    }
+  </script>
+
+  <script src="./https___app.teta.so_#_home_files/main.dart.js.transferir" type="application/javascript"></script><flt-file-picker-inputs id="__file_picker_web-file-input"><input type="file" draggable="true" accept="image/*"></flt-file-picker-inputs><flt-glass-pane style="position: absolute; inset: 0px; cursor: default;"><flt-platform-view slot="flt-pv-slot-1"><div style="width: 100%; height: 100%;"></div></flt-platform-view></flt-glass-pane>
+
+
+<iframe name="__privateStripeMetricsController4450" frameborder="0" allowtransparency="true" scrolling="no" allow="payment *" src="./https___app.teta.so_#_home_files/m-outer-08a1fefa46cfc8cc94fc477ddcdb0555.html" aria-hidden="true" tabindex="-1" style="border: none !important; margin: 0px !important; padding: 0px !important; width: 1px !important; min-width: 100% !important; overflow: hidden !important; display: block !important; visibility: hidden !important; position: fixed !important; height: 1px !important; pointer-events: none !important; user-select: none !important;"></iframe><div id="weava-permanent-marker" date="1644463116119"></div><div id="weava-ui-wrapper"><div class="weava-drop-area-wrapper"><div class="weava-drop-area"></div>
+<div class="weava-drop-area-text">Drop here!</div>
+</div></div></body></html>
